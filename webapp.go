@@ -45,9 +45,7 @@ func staticDirHandler(mux *http.ServeMux, prefix string) {
 		})
 }
 func main() {
-
 	var mux = http.NewServeMux()
-
 	mux.HandleFunc("/favicon.ico", func(resp http.ResponseWriter,req *http.Request) {
 		resp.WriteHeader(404)
 		resp.Write([]byte{})

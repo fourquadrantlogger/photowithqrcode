@@ -6,3 +6,6 @@ http://localhost:8005/makeimg?bg=京东广告图.jpg&x=640&y=200&width=238&heigh
 
 http://localhost:8005/bgimg/京东广告图.jpg
 http://localhost:8005/bgimg/抱抱广告图.jpg
+
+## 输出图片格式
+png
