@@ -5,6 +5,7 @@ http://localhost:8005/makeimg?bg=京东广告图.jpg&x=648&y=207&width=220&heigh
 + 查看您的背景图
 
 http://localhost:8005/bgimg/京东广告图.jpg
+
 http://localhost:8005/bgimg/抱抱广告图.jpg
 
 
