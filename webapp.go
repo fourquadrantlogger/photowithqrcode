@@ -2,7 +2,7 @@ package main
 
 import (
 	"io/ioutil"
-	"./drawqrcode"
+	"code.aliyun.com/mougew/photowithqrcode/drawqrcode"
 	"net/http"
 	"strconv"
 	"fmt"
@@ -11,10 +11,10 @@ import (
 var (
 	bgname="京东广告图.jpg"
 	qrtext="填写测试网址"
-	x=640
-	y=200
-	w=238
-	h=238
+	x=648
+	y=205
+	w=220
+	h=220
 )
 func handlerMakeqrimg(resp http.ResponseWriter,req *http.Request)  {
 	v:=req.URL.Query()

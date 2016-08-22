@@ -1,6 +1,6 @@
 ## web模式 try this link
 
-http://localhost:8005/makeimg?bg=京东广告图.jpg&x=640&y=200&width=238&height=238&qrtext=qweqqrqrqr
+http://localhost:8005/makeimg?bg=京东广告图.jpg&x=648&y=207&width=220&height=220&qrtext=http://mxz.so/2u34
 
 + 查看您的背景图
 
