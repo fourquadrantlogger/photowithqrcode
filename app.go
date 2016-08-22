@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strconv"
 	"fmt"
+	"log"
 )
 var (
 	bgname="京东广告图.jpg"
@@ -15,7 +16,7 @@ var (
 	w=238
 	h=238
 )
-func handler(resp http.ResponseWriter,req *http.Request)  {
+func handlerMakeqrimg(resp http.ResponseWriter,req *http.Request)  {
 	v:=req.URL.Query()
 	fmt.Println(req.URL.String(),v)
 	bgname:=v["bg"][0]
@@ -34,14 +35,26 @@ func handler(resp http.ResponseWriter,req *http.Request)  {
 
 	resp.Write(bf.Bytes())
 }
-
+func staticDirHandler(mux *http.ServeMux, prefix string) {
+	mux.HandleFunc(prefix,
+		func(w http.ResponseWriter, r *http.Request) {
+			log.Println(r.URL.Path)
+			file :=r.URL.Path[1:]
+			log.Println(file)
+			http.ServeFile(w, r, file)
+		})
+}
 func main() {
-	http.HandleFunc("/favicon.ico", func(resp http.ResponseWriter,req *http.Request) {
+
+	var mux = http.NewServeMux()
+
+	mux.HandleFunc("/favicon.ico", func(resp http.ResponseWriter,req *http.Request) {
 		resp.WriteHeader(404)
 		resp.Write([]byte{})
 	})
-	http.HandleFunc("/",handler)
-	err := http.ListenAndServe(":8005",nil)
+	mux.HandleFunc("/makeimg",handlerMakeqrimg)
+	staticDirHandler(mux, "/bgimg/")
+	err := http.ListenAndServe(":8005",mux)
 	if err!=nil{
 		panic(err)
 	}
