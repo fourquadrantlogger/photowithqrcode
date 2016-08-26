@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"fmt"
 	"log"
+	"strings"
 )
 var (
 	bgname="京东广告图.jpg"
@@ -26,9 +27,19 @@ func handlerMakeqrimg(resp http.ResponseWriter,req *http.Request)  {
 	w,err:=strconv.Atoi(v["width"][0])
 	h,err:=strconv.Atoi(v["height"][0])
 
-	bgbs,err:=ioutil.ReadFile("bgimg/"+bgname)
-	if err!=nil{
-		panic(err)
+	bgbs:=make([]byte,0)
+	if(strings.Contains(bgname,"http://")||strings.Contains(bgname,"https://")){
+		url := bgname
+		req, _ := http.NewRequest("GET", url, nil)
+		res, _ := http.DefaultClient.Do(req)
+		defer res.Body.Close()
+		bgbs, _ = ioutil.ReadAll(res.Body)
+	}else {
+		bgbs,err=ioutil.ReadFile("bgimg/"+bgname)
+	}
+
+	if(err!=nil){
+		resp.Write([]byte(err.Error()))
 	}
 	img:=drawqrcode.Get(bgbs,qrtext,x,y,w,h)
 	bf:=drawqrcode.ImageSave(img)
