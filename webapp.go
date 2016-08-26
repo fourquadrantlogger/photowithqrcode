@@ -44,6 +44,7 @@ func handlerMakeqrimg(resp http.ResponseWriter,req *http.Request)  {
 	img:=drawqrcode.Get(bgbs,qrtext,x,y,w,h)
 	bf:=drawqrcode.ImageSave(img)
 
+	resp.Header().Add("Access-Control-Allow-Origin", "*")
 	resp.Write(bf.Bytes())
 }
 func staticDirHandler(mux *http.ServeMux, prefix string) {
